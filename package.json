@@ -1,6 +1,6 @@
 {
   "name": "micro-react",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "Create microservice apps with React components",
   "bin": {
     "micro-react": "./cli.js"
