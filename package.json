@@ -14,7 +14,7 @@
     "aync": "./cli.js docs/Async.js",
     "styled": "./cli.js docs/StyledComponents.js",
     "nano": "./cli.js docs/Nano.js",
-    "bundle": "NODE_ENV=production ./cli.js docs/Bundle.js --bundle"
+    "bundle": "./cli.js docs/Bundle.js --bundle"
   },
   "keywords": [],
   "author": "Brent Jackson",

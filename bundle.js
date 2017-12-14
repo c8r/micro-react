@@ -38,6 +38,7 @@ const browser = (filename, code) => {
 }
 
 const bundle = async filename => {
+  process.env.NODE_ENV = 'production'
   const raw = fs.readFileSync(filename)
   const component = parse(filename, raw)
   const entry = createEntry(component)
