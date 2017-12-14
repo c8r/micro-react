@@ -66,6 +66,16 @@ const App = async props => {
 module.exports = App
 ```
 
+## Client-side JS
+
+By default micro-react only serves static HTML.
+Pass the `--bundle` flag to create a browser-compatible bundle on start,
+that will be sent in the request after the React Node stream has finished.
+
+```sh
+micro-react App.js --bundle
+```
+
 See the [examples](examples) for more.
 
 [MIT License](LICENSE.md)
