@@ -1,0 +1,35 @@
+{
+  "name": "micro-react",
+  "version": "1.0.0-1",
+  "description": "Create microservice apps with React components",
+  "bin": {
+    "micro-react": "./cli.js"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=8.0"
+  },
+  "scripts": {
+    "start": "./cli.js docs/App.js",
+    "aync": "./cli.js docs/Async.js",
+    "styled": "./cli.js docs/StyledComponents.js",
+    "nano": "./cli.js docs/Nano.js"
+  },
+  "keywords": [],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "meow": "^4.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "update-notifier": "^2.3.0"
+  },
+  "devDependencies": {
+    "nano-style": "^1.0.0-20",
+    "node-fetch": "^1.7.3",
+    "styled-components": "^2.2.4",
+    "styled-system": "^1.1.1"
+  }
+}
