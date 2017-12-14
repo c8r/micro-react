@@ -3,6 +3,7 @@ const path = require('path')
 const { Readable } = require('stream')
 const babel = require('babel-core')
 const browserify = require('browserify')
+const { minify } = require('uglify-es')
 
 const parse = (filename, raw) => babel.transform(raw, {
   filename,
@@ -41,7 +42,8 @@ const bundle = async filename => {
   const component = parse(filename, raw)
   const entry = createEntry(component)
   const script = await browser(filename, entry)
-  return script
+  const min = minify(script).code
+  return min
 }
 
 // current doesn't handle async components

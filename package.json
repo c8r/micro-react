@@ -14,7 +14,7 @@
     "aync": "./cli.js docs/Async.js",
     "styled": "./cli.js docs/StyledComponents.js",
     "nano": "./cli.js docs/Nano.js",
-    "bundle": "./cli.js docs/Bundle.js --bundle"
+    "bundle": "NODE_ENV=production ./cli.js docs/Bundle.js --bundle"
   },
   "keywords": [],
   "author": "Brent Jackson",
@@ -30,6 +30,7 @@
     "meow": "^4.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "uglify-es": "^3.2.2",
     "update-notifier": "^2.3.0"
   },
   "devDependencies": {
