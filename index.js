@@ -8,22 +8,44 @@ const http = require('http')
 const url = require('url')
 const React = require('react')
 const { renderToNodeStream } = require('react-dom/server')
+const jsonStringify = require('json-stringify-safe')
 
-const start = async (input, opts) => {
+const bundle = require('./bundle')
+
+const start = async (opts) => {
   opts.port = opts.port || 3000
-  const App = require(input)
+  if (opts.bundle) {
+    opts.script = await bundle(opts.filename)
+    console.log('bundle size: ' + opts.script.length + ' bytes')
+  }
+  const App = require(opts.filename)
   const server = http.createServer(handleRequest(App, opts))
   return await server.listen(opts.port)
 }
 
 const handleRequest = (App, opts) => async (req, res) => {
   if (!opts.raw) res.write(header)
+  res.write('<div id=div>')
   const props = Object.assign({}, opts, { req })
+
+  delete props.script
+
   const el = isAsync(App)
     ? await createAsyncElement(App, props)
     : React.createElement(App, props)
   const stream = renderToNodeStream(el)
-  stream.pipe(res)
+  stream.pipe(res, { end: false })
+
+  stream.on('end', async () => {
+    res.write('</div>')
+    if (opts.script) {
+      const json = jsonStringify(props)
+      res.write(`<script id='initial_props' type='application/json'>${json}</script>`)
+      res.write(`<script>${opts.script}</script>`)
+    }
+
+    res.end()
+  })
 }
 
 const isAsync = fn => fn.constructor.name === 'AsyncFunction'

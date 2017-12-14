@@ -30,12 +30,13 @@ const cli = meow(`
 })
 
 const [ file ] = cli.input
-const input = path.join(process.cwd(), file)
+const filename = path.join(process.cwd(), file)
 const opts = Object.assign({}, cli.flags, {
+  filename,
   port: parseInt(cli.flags.port || 3000)
 })
 
-start(input, opts)
+start(opts)
   .then(server => {
     const { port } = server.address()
     console.log(`listening on port ${port}`)
