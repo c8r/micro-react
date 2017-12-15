@@ -1,6 +1,8 @@
 
 # Examples
 
+Use the npm run scripts in this repository's [`package.json`](../package.json) to run each example.
+
 - [App](App.js): barebones example
 - [Async](Async.js): async component with fetching
 - [StyledComponents](StyledComponents.js): [styled-components][styled-components] with SSR CSS generation

@@ -76,6 +76,6 @@ that will be sent in the request after the React Node stream has finished.
 micro-react App.js --bundle
 ```
 
-See the [examples](examples) for more.
+See the [examples](docs) for more.
 
 [MIT License](LICENSE.md)
