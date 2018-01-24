@@ -15,7 +15,7 @@
     "styled": "./cli.js docs/StyledComponents.js",
     "nano": "./cli.js docs/Nano.js",
     "bundle": "./cli.js docs/Bundle.js --bundle",
-    "icon": "./cli.js docs/Icon.js -ng"
+    "icon": "./cli.js docs/Icon.js -n"
   },
   "keywords": [],
   "author": "Brent Jackson",
