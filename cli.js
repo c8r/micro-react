@@ -13,9 +13,11 @@ const cli = meow(`
     $ micro-react <component>
 
   Options
-    --port, -p    Server port
-    --raw, -r     Serve raw output with no doctype declaration
-
+    --port, -p     Server port
+    --raw, -r      Serve raw output with no doctype declaration
+    --bundle, -b   Render with bundled javascript
+    --noWrap, -n   Opt out of wrapping component in a div
+    --svg, -g      Set content-type to image/svg+xml
 `, {
   flags: {
     port: {
@@ -25,6 +27,20 @@ const cli = meow(`
     raw: {
       type: 'boolean',
       alias: 'r'
+    },
+    bundle: {
+      type: 'boolean',
+      alias: 'b'
+    },
+    noWrap: {
+      type: 'boolean',
+      default: false,
+      alias: 'n'
+    },
+    svg: {
+      type: 'boolean',
+      default: false,
+      alias: 'g'
     }
   }
 })
@@ -38,6 +54,11 @@ const opts = Object.assign({}, cli.flags, {
 
 start(opts)
   .then(server => {
+    if (!server.address()) {
+      console.log(`failed to start server on ${cli.flags.port || 3000}`)
+      process.exit(1)
+    }
+
     const { port } = server.address()
     console.log(`listening on port ${port}`)
   })
