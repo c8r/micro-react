@@ -11,10 +11,11 @@
   },
   "scripts": {
     "start": "./cli.js docs/App.js",
-    "aync": "./cli.js docs/Async.js",
+    "async": "./cli.js docs/Async.js",
     "styled": "./cli.js docs/StyledComponents.js",
     "nano": "./cli.js docs/Nano.js",
-    "bundle": "./cli.js docs/Bundle.js --bundle"
+    "bundle": "./cli.js docs/Bundle.js --bundle",
+    "icon": "./cli.js docs/Icon.js -ng"
   },
   "keywords": [],
   "author": "Brent Jackson",

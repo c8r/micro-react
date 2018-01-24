@@ -7,7 +7,10 @@ require('babel-register')({
 const http = require('http')
 const url = require('url')
 const React = require('react')
-const { renderToNodeStream } = require('react-dom/server')
+const {
+  renderToNodeStream,
+  renderToStaticNodeStream
+} = require('react-dom/server')
 const jsonStringify = require('json-stringify-safe')
 
 const bundle = require('./bundle')
@@ -24,8 +27,9 @@ const start = async (opts) => {
 }
 
 const handleRequest = (App, opts) => async (req, res) => {
-  if (!opts.raw) res.write(header)
-  res.write('<div id=div>')
+  if (opts.svg) res.setHeader('Content-Type', 'image/svg+xml')
+  if (!opts.raw && !opts.noWrap) res.write(header)
+  if (!opts.noWrap) res.write('<div id=div>')
   const props = Object.assign({}, opts, { req })
 
   delete props.script
@@ -33,17 +37,25 @@ const handleRequest = (App, opts) => async (req, res) => {
   const el = isAsync(App)
     ? await createAsyncElement(App, props)
     : React.createElement(App, props)
-  const stream = renderToNodeStream(el)
+  const stream = opts.bundle
+    ? renderToNodeStream(el)
+    : renderToStaticNodeStream(el)
+
   stream.pipe(res, { end: false })
 
   stream.on('end', async () => {
-    res.write('</div>')
+    if (!opts.noWrap) res.write('</div>')
     if (opts.script) {
       const json = jsonStringify(props)
       res.write(`<script id='initial_props' type='application/json'>${json}</script>`)
       res.write(`<script>${opts.script}</script>`)
     }
 
+    res.end()
+  })
+
+  stream.on('error', error => {
+    console.error(error)
     res.end()
   })
 }
