@@ -17,7 +17,6 @@ const cli = meow(`
     --raw, -r      Serve raw output with no doctype declaration
     --bundle, -b   Render with bundled javascript
     --noWrap, -n   Opt out of wrapping component in a div
-    --svg, -g      Set content-type to image/svg+xml
 `, {
   flags: {
     port: {
@@ -36,11 +35,6 @@ const cli = meow(`
       type: 'boolean',
       default: false,
       alias: 'n'
-    },
-    svg: {
-      type: 'boolean',
-      default: false,
-      alias: 'g'
     }
   }
 })

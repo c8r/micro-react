@@ -27,7 +27,6 @@ const start = async (opts) => {
 }
 
 const handleRequest = (App, opts) => async (req, res) => {
-  if (opts.svg) res.setHeader('Content-Type', 'image/svg+xml')
   if (!opts.raw && !opts.noWrap) res.write(header)
   if (!opts.noWrap) res.write('<div id=div>')
   const props = Object.assign({}, opts, { req, res })
