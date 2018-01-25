@@ -48,7 +48,7 @@ module.exports = App
 
 ## Response Object
 
-The Node.js http response object is passed as `props.req`.
+The Node.js http response object is passed as `props.res`.
 This can be used to set headers if you want to, for example, change the content type to `image/svg+xml`.
 
 ```jsx
