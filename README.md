@@ -46,6 +46,22 @@ const App = props => (
 module.exports = App
 ```
 
+## Response Object
+
+The Node.js http response object is passed as `props.req`.
+This can be used to set headers if you want to, for example, change the content type to `image/svg+xml`.
+
+```jsx
+const React = require('react')
+
+const SvgIcon = require('./SvgIcon')
+
+module.exports = props => {
+  props.res.setHeader('Content-Type', 'image/svg+xml')
+  return <SvgIcon {...props} />
+}
+```
+
 ## Async Components
 
 Use async functions to fetch data and handle other asynchronous tasks before rendering.
